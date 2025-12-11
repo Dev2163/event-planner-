@@ -186,8 +186,8 @@ const CostEstimator = () => {
                                             key={key}
                                             onClick={() => toggleAddon(key as keyof typeof PRICING.addons)}
                                             className={`p-3 rounded-lg border-2 transition-all text-left ${estimate.addons.includes(key as keyof typeof PRICING.addons)
-                                                    ? 'border-primary bg-primary/10'
-                                                    : 'border-border hover:border-primary/50'
+                                                ? 'border-primary bg-primary/10'
+                                                : 'border-border hover:border-primary/50'
                                                 }`}
                                         >
                                             <div className="flex items-start justify-between gap-2">

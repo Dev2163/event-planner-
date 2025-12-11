@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,21 +16,21 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "Packages", href: "#packages" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "#home", type: "anchor" },
+    { name: "Services", href: "#services", type: "anchor" },
+    { name: "Packages", href: "#packages", type: "anchor" },
+    { name: "Cost Estimator", href: "/cost-estimator", type: "router" },
+    { name: "Gallery", href: "#gallery", type: "anchor" },
+    { name: "Testimonials", href: "#testimonials", type: "anchor" },
+    { name: "Contact", href: "#contact", type: "anchor" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-primary/10 py-3"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? "bg-background/80 backdrop-blur-xl border-b border-primary/10 py-3"
+        : "bg-transparent py-5"
+        }`}
     >
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
@@ -43,13 +44,24 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {link.name}
-            </a>
+            link.type === "router" ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full flex items-center gap-1"
+              >
+                <Calculator className="w-4 h-4" />
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {link.name}
+              </a>
+            )
           ))}
         </div>
 
@@ -71,20 +83,31 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-primary/10 transition-all duration-300 ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-primary/10 transition-all duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
       >
         <div className="container-custom py-6 flex flex-col gap-4">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-foreground hover:text-primary transition-colors py-2 text-lg"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </a>
+            link.type === "router" ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-foreground hover:text-primary transition-colors py-2 text-lg flex items-center gap-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Calculator className="w-5 h-5" />
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-foreground hover:text-primary transition-colors py-2 text-lg"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            )
           ))}
           <Button variant="gold" size="lg" className="mt-4">
             Book Now
