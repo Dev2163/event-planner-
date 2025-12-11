@@ -132,7 +132,7 @@ Date: ${formData.eventDate || "Not selected"}
 Guests: ${formData.guestCount || "Not specified"}`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/919876543210?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/917016686728?text=${encodedMessage}`, "_ blank");
   };
 
   return (
