@@ -4,7 +4,7 @@ import { Calendar, Users, MapPin, Phone, Mail, User, MessageSquare, Check, Spark
 import { toast } from "sonner";
 import AnimatedSection from "@/components/AnimatedSection";
 import { z } from "zod";
-
+//jay devsu
 const eventTypes = [
   "Wedding",
   "Birthday Party",
