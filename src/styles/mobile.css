@@ -1,0 +1,570 @@
+/**
+ * Mobile-First Enhanced Styles
+ * Super optimized for mobile devices
+ */
+
+/* ========================================
+   MOBILE VIEWPORT FIX
+   ======================================== */
+
+/* Fix for mobile browser address bar */
+:root {
+    --vh: 1vh;
+}
+
+.min-h-screen-mobile {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* ========================================
+   SAFE AREA INSETS (iPhone X+)
+   ======================================== */
+
+@supports (padding: max(0px)) {
+    :root {
+        --sat: env(safe-area-inset-top);
+        --sar: env(safe-area-inset-right);
+        --sab: env(safe-area-inset-bottom);
+        --sal: env(safe-area-inset-left);
+    }
+
+    .safe-top {
+        padding-top: max(1rem, env(safe-area-inset-top));
+    }
+
+    .safe-bottom {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .safe-left {
+        padding-left: max(1rem, env(safe-area-inset-left));
+    }
+
+    .safe-right {
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+}
+
+/* ========================================
+   TOUCH OPTIMIZATIONS
+   ======================================== */
+
+/* Larger touch targets for mobile */
+@media (max-width: 768px) {
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Remove tap highlight */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+
+    /* Smooth scrolling */
+    html {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    /* Prevent text selection on buttons */
+    button {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* ========================================
+   MOBILE ANIMATIONS
+   ======================================== */
+
+/* Slide up animation for mobile */
+@keyframes slideUpMobile {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bounce in animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-10px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(10px);
+    }
+}
+
+/* Pulse glow for important elements */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+    }
+}
+
+.animate-slide-up-mobile {
+    animation: slideUpMobile 0.5s ease-out;
+}
+
+.animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-shake {
+    animation: shake 0.5s;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+}
+
+/* ========================================
+   MOBILE CARDS
+   ======================================== */
+
+.mobile-card {
+    @apply rounded-2xl p-4 bg-card shadow-lg;
+    @apply transition-all duration-300;
+    @apply active:scale-95;
+}
+
+.mobile-card-hover {
+    @apply hover:shadow-xl hover:-translate-y-1;
+}
+
+/* ========================================
+   MOBILE BUTTONS
+   ======================================== */
+
+.mobile-btn {
+    @apply px-6 py-3 rounded-full font-semibold;
+    @apply transition-all duration-200;
+    @apply active:scale-95;
+    @apply shadow-md active:shadow-sm;
+}
+
+.mobile-btn-primary {
+    @apply mobile-btn bg-primary text-primary-foreground;
+    @apply active:bg-primary/90;
+}
+
+.mobile-btn-secondary {
+    @apply mobile-btn bg-secondary text-secondary-foreground;
+    @apply active:bg-secondary/90;
+}
+
+/* ========================================
+   MOBILE INPUTS
+   ======================================== */
+
+.mobile-input {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-muted/50 border border-border;
+    @apply focus:border-primary focus:outline-none;
+    @apply focus:ring-2 focus:ring-primary/20;
+    @apply transition-all duration-200;
+    font-size: 16px;
+    /* Prevents zoom on iOS */
+}
+
+.mobile-input:focus {
+    @apply bg-background;
+}
+
+/* ========================================
+   MOBILE NAVIGATION
+   ======================================== */
+
+.mobile-nav {
+    @apply fixed bottom-0 left-0 right-0;
+    @apply bg-background/95 backdrop-blur-lg;
+    @apply border-t border-border;
+    @apply safe-bottom;
+    @apply z-50;
+}
+
+.mobile-nav-item {
+    @apply flex flex-col items-center justify-center;
+    @apply py-2 px-4 text-xs;
+    @apply transition-colors duration-200;
+    @apply active:scale-95;
+}
+
+.mobile-nav-item.active {
+    @apply text-primary;
+}
+
+/* ========================================
+   MOBILE MODALS
+   ======================================== */
+
+.mobile-modal {
+    @apply fixed inset-0 z-50;
+    @apply bg-background;
+    @apply animate-slide-up-mobile;
+}
+
+.mobile-modal-header {
+    @apply sticky top-0 z-10;
+    @apply bg-background/95 backdrop-blur-lg;
+    @apply border-b border-border;
+    @apply px-4 py-3 safe-top;
+}
+
+.mobile-modal-content {
+    @apply p-4 pb-20;
+    @apply overflow-y-auto;
+    height: calc(100vh - 60px);
+}
+
+/* ========================================
+   MOBILE PULL TO REFRESH
+   ======================================== */
+
+.pull-to-refresh {
+    @apply fixed top-0 left-0 right-0;
+    @apply flex items-center justify-center;
+    @apply bg-primary/10;
+    @apply transition-all duration-300;
+    @apply safe-top;
+}
+
+.pull-to-refresh-icon {
+    @apply text-primary;
+    animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   MOBILE GESTURES
+   ======================================== */
+
+.swipeable {
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.swipeable-item {
+    @apply transition-transform duration-200;
+}
+
+/* ========================================
+   MOBILE LOADING
+   ======================================== */
+
+.mobile-skeleton {
+    @apply bg-muted animate-pulse rounded;
+}
+
+.mobile-spinner {
+    @apply w-8 h-8 border-4 border-primary/30;
+    @apply border-t-primary rounded-full;
+    @apply animate-spin;
+}
+
+/* ========================================
+   MOBILE TOAST/NOTIFICATIONS
+   ======================================== */
+
+.mobile-toast {
+    @apply fixed bottom-20 left-4 right-4;
+    @apply bg-card shadow-xl rounded-2xl;
+    @apply p-4 animate-slide-up-mobile;
+    @apply safe-bottom;
+}
+
+.mobile-toast-success {
+    @apply mobile-toast border-l-4 border-green-500;
+}
+
+.mobile-toast-error {
+    @apply mobile-toast border-l-4 border-red-500;
+}
+
+.mobile-toast-info {
+    @apply mobile-toast border-l-4 border-blue-500;
+}
+
+/* ========================================
+   MOBILE SCROLL INDICATORS
+   ======================================== */
+
+.scroll-indicator {
+    @apply fixed bottom-24 right-4;
+    @apply w-12 h-12 rounded-full;
+    @apply bg-primary text-primary-foreground;
+    @apply flex items-center justify-center;
+    @apply shadow-lg animate-bounce;
+    @apply safe-bottom;
+}
+
+/* ========================================
+   MOBILE PERFORMANCE
+   ======================================== */
+
+/* Hardware acceleration */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ========================================
+   MOBILE DARK MODE ENHANCEMENTS
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .mobile-card {
+        @apply bg-card/50 backdrop-blur-xl;
+    }
+
+    .mobile-input {
+        @apply bg-background/50;
+    }
+}
+
+/* ========================================
+   MOBILE LANDSCAPE MODE
+   ======================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-modal-content {
+        height: calc(100vh - 50px);
+    }
+
+    .mobile-nav {
+        @apply py-1;
+    }
+
+    .mobile-nav-item {
+        @apply py-1 text-xs;
+    }
+}
+
+/* ========================================
+   MOBILE SPECIFIC UTILITIES
+   ======================================== */
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Smooth momentum scrolling */
+.momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+}
+
+/* Prevent overscroll bounce */
+.no-overscroll {
+    overscroll-behavior: none;
+}
+
+/* Full height on mobile */
+.mobile-full-height {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+/* ========================================
+   MOBILE GRID LAYOUTS
+   ======================================== */
+
+.mobile-grid-1 {
+    @apply grid grid-cols-1 gap-4;
+}
+
+.mobile-grid-2 {
+    @apply grid grid-cols-2 gap-3;
+}
+
+.mobile-grid-auto {
+    @apply grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* ========================================
+   MOBILE SPACING
+   ======================================== */
+
+.mobile-section {
+    @apply py-12 px-4;
+}
+
+.mobile-container {
+    @apply max-w-screen-sm mx-auto px-4;
+}
+
+/* ========================================
+   MOBILE TYPOGRAPHY
+   ======================================== */
+
+.mobile-heading-1 {
+    @apply text-3xl font-bold leading-tight;
+}
+
+.mobile-heading-2 {
+    @apply text-2xl font-semibold leading-snug;
+}
+
+.mobile-heading-3 {
+    @apply text-xl font-medium;
+}
+
+.mobile-body {
+    @apply text-base leading-relaxed;
+}
+
+.mobile-caption {
+    @apply text-sm text-muted-foreground;
+}
+
+/* ========================================
+   MOBILE BADGES
+   ======================================== */
+
+.mobile-badge {
+    @apply inline-flex items-center px-3 py-1;
+    @apply rounded-full text-xs font-medium;
+    @apply bg-primary/10 text-primary;
+}
+
+/* ========================================
+   MOBILE DIVIDERS
+   ======================================== */
+
+.mobile-divider {
+    @apply h-px bg-border my-4;
+}
+
+.mobile-divider-text {
+    @apply flex items-center gap-4 my-4;
+}
+
+.mobile-divider-text::before,
+.mobile-divider-text::after {
+    content: '';
+    @apply flex-1 h-px bg-border;
+}
+
+/* ========================================
+   MOBILE FLOATING ACTION BUTTON
+   ======================================== */
+
+.mobile-fab {
+    @apply fixed bottom-20 right-4;
+    @apply w-14 h-14 rounded-full;
+    @apply bg-primary text-primary-foreground;
+    @apply flex items-center justify-center;
+    @apply shadow-lg active:scale-95;
+    @apply transition-all duration-200;
+    @apply safe-bottom;
+}
+
+.mobile-fab:active {
+    @apply shadow-md;
+}
+
+/* ========================================
+   MOBILE BOTTOM SHEET
+   ======================================== */
+
+.mobile-bottom-sheet {
+    @apply fixed bottom-0 left-0 right-0;
+    @apply bg-background rounded-t-3xl;
+    @apply shadow-2xl;
+    @apply animate-slide-up-mobile;
+    @apply safe-bottom;
+    max-height: 90vh;
+}
+
+.mobile-bottom-sheet-handle {
+    @apply w-12 h-1 bg-muted rounded-full;
+    @apply mx-auto my-3;
+}
+
+/* ========================================
+   MOBILE STATUS BAR
+   ======================================== */
+
+.mobile-status-bar {
+    @apply h-6 bg-background;
+    @apply safe-top;
+}
+
+/* ========================================
+   CONTACT INFO
+   ======================================== */
+
+/* Phone: +91 7016686728 */
